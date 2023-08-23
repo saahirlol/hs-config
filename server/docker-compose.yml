@@ -1,0 +1,23 @@
+version: '3.5'
+services:
+  headscale:
+    image: headscale/headscale:latest
+    container_name: headscale
+    volumes:
+      - ./container-config:/etc/headscale
+      - ./container-data/data:/var/lib/headscale
+      - ./container-run:/var/run/headscale
+#    ports:
+#      - 8080:8080
+    command: headscale serve
+    restart: unless-stopped
+    privileged: true
+  caddy:
+      container_name: caddy
+      image: caddy:2.0.0-alpine
+      ports:
+        - 80:80
+        - 443:443
+      volumes:
+        - ./caddy:/data
+        - ./caddyfile:/etc/caddy/Caddyfile
