@@ -1,0 +1,3 @@
+https://hs.yourdomain.here {
+	reverse_proxy * http://headscale 
+}
