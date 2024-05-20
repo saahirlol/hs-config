@@ -22,7 +22,7 @@ Headscale is an open-source, self-hosted implementation of the Tailscale control
     ```
 2. Navigate to the directory:
     ```bash
-    cd hs-config
+    cd hs-config/server
     ```
 3. Modify the configuration file `config.yaml`:
     - Update all instances of `yourdomain.here` with your actual domain.
