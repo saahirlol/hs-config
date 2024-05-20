@@ -22,9 +22,13 @@ Headscale is an open-source, self-hosted implementation of the Tailscale control
     ```
 2. Navigate to the directory:
     ```bash
-    cd hs-config/server
+    cd hs-config
     ```
-3. Build and run the Docker containers:
+3. Modify the configuration file `config.yaml`:
+    - Update all instances of `yourdomain.here` with your actual domain.
+    - Configure the OIDC settings with your specific OpenID Connect provider information.
+
+4. Build and run the Docker containers:
     ```bash
     docker-compose up --build
     ```
@@ -37,7 +41,7 @@ After installation, Headscale will be running in Docker containers. You can inte
 
 - To start the containers:
     ```bash
-    docker-compose up
+    docker-compose up -d
     ```
 
 - To stop the containers:
@@ -59,11 +63,31 @@ Configuration files are located in the `config` directory. You can customize the
 
 ### Customizing `config.yaml`
 
-To change the settings for your Headscale instance, open the `config.yaml` file and modify the parameters as needed. For example, to change the server address:
-```yaml
-server:
-  addr: "your-server-address:port"
-```
+To change the settings for your Headscale instance, open the `config.yaml` file and modify the parameters as needed. 
+
+**Important**: Ensure you update the following sections with your specific information:
+- Replace `yourdomain.here` with your actual domain.
+- Configure the OIDC settings with your OpenID Connect provider details.
+
+Example modifications:
+- **server_url**: The URL clients will connect to.
+    ```yaml
+    server_url: https://hs.yourdomain.here:443
+    ```
+
+- **base_domain**: Base domain for MagicDNS.
+    ```yaml
+    base_domain: yourdomain.here
+    ```
+
+- **OIDC Configuration**:
+    ```yaml
+    oidc:
+      only_start_if_oidc_is_available: true
+      issuer: "https://logins.yourdomain.here/application/o/hs/"
+      client_id: "id"
+      client_secret: "secret"
+    ```
 
 ### Customizing `docker-compose.yml`
 
